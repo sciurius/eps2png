@@ -2,8 +2,8 @@
 # Author          : Johan Vromans
 # Created On      : Sat Jun  6 16:08:33 1998
 # Last Modified By: Johan Vromans
-# Last Modified On: Sun Jun  7 13:52:50 1998
-# Update Count    : 10
+# Last Modified On: Wed Nov 11 09:21:02 1998
+# Update Count    : 11
 # Status          : Released
 
 use ExtUtils::MakeMaker;
@@ -18,7 +18,7 @@ my $wrap = join (';',
 WriteMakefile
   (
 	NAME         => "$scripts[0]",
-	VERSION      => "1.4",
+	VERSION      => "1.5",
 	dist         => { PREOP    => "$wrap",
 			  COMPRESS => "gzip",
 			  SUFFIX   => "gz",
