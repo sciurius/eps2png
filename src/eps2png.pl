@@ -5,8 +5,8 @@ my $RCS_Id = '$Id$ ';
 # Author          : Johan Vromans
 # Created On      : Tue Sep 15 15:59:04 1992
 # Last Modified By: Johan Vromans
-# Last Modified On: Sun Jun  7 13:34:49 1998
-# Update Count    : 69
+# Last Modified On: Sun Jun  7 13:42:07 1998
+# Update Count    : 70
 # Status          : Unknown, Use with caution!
 
 ################ Common stuff ################
@@ -18,7 +18,7 @@ my $my_package = "Sciurix";
 
 my ($VERSION);
 # The next line is for MakeMaker.
-($VERSION) = '$ Revision: 1.1 $ ' =~ /: ([\d.]+)/;
+($VERSION) = '$Revision$ ' =~ /: ([\d.]+)/;
 
 my ($my_name, $my_version) = $RCS_Id =~ /: (.+).pl,v ([\d.]+)/;
 $my_version .= '*' if length('$Locker$ ') > 12;

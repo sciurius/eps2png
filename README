@@ -35,53 +35,10 @@ Execute the following commands. Note that this is the standard
 procedure for Perl extensions and programs:
 
   % perl Makefile.PL
-  % make all test
+  % make all
   % make install
 
 The last command requires superuser (root) privilege.
-
-This is an example installation session. Your exact results may vary
-depending on your system and Perl installation:
-
-  % gzip -d < eps2png-1.1.tar.gz | tar -xvf -
-  eps2png-1.1/
-  eps2png-1.1/Makefile.PL
-  eps2png-1.1/eps2png.PL
-  eps2png-1.1/README
-  eps2png-1.1/MANIFEST
-
-  % cd eps2png-1.1/
-
-  % perl Makefile.PL
-  Checking if your kit is complete...
-  Looks good
-  Writing Makefile for eps2png
-
-  % make all test
-  mkdir blib
-  mkdir blib/lib
-  mkdir blib/arch
-  mkdir blib/arch/auto
-  mkdir blib/arch/auto/eps2png
-  mkdir blib/lib/auto
-  mkdir blib/lib/auto/eps2png
-  mkdir blib/man1
-  /usr/bin/perl -Iblib/arch -Iblib/lib -I/usr/lib/perl5/i686-linux/5.00466 -I/usr/lib/perl5 eps2png.PL
-  Extracting eps2png (with variable substitutions)
-  Manifying blib/man1/eps2png.1
-  mkdir blib/script
-  cp eps2png blib/script/eps2png
-  /usr/bin/perl -I/usr/lib/perl5/i686-linux/5.00466 -I/usr/lib/perl5 -MExtUtils::MakeMaker -e "MY->fixin(shift)" blib/script/eps2png
-  No tests defined for eps2png extension.
-
-  % su
-  Password:
-
-  # make install
-  Installing /usr/man/man1/eps2png.1
-  Installing /usr/bin/eps2png
-  Writing /usr/lib/perl5/site_perl/i686-linux/auto/eps2png/.packlist
-  Appending installation info to /usr/lib/perl5/i686-linux/5.00466/perllocal.pod
 
 ADDITIONAL LINKS
 ----------------
