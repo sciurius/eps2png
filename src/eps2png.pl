@@ -5,8 +5,8 @@ my $RCS_Id = '$Id$ ';
 # Author          : Johan Vromans
 # Created On      : Tue Sep 15 15:59:04 1992
 # Last Modified By: Johan Vromans
-# Last Modified On: Wed Nov 11 09:20:40 1998
-# Update Count    : 72
+# Last Modified On: Mon Jul 10 17:06:25 2000
+# Update Count    : 73
 # Status          : Unknown, Use with caution!
 
 ################ Common stuff ################
@@ -86,7 +86,7 @@ foreach $eps_file ( @ARGV ) {
     while ( $line = <EPS> ) {
 
 	# Search for BoundingBox.
-	if ( $line =~ /^%%BoundingBox:\s*(.+)\s+(.+)\s+(.+)\s+(.+)/i ) {
+	if ( $line =~ /^%%BoundingBox:\s*(\S+)\s+(\S+)\s+(\S+)\s+(\S+)/i ) {
 
 	    # Create PostScript code to translate coordinates.
 	    print PS ("%!PS\n",
