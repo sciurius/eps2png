@@ -1,21 +1,25 @@
+#! perl
+
 my $RCS_Id = '$Id$ ';
 
 # Author          : Johan Vromans
 # Created On      : Tue Sep 15 15:59:04 1992
 # Last Modified By: Johan Vromans
-# Last Modified On: Sat Jun  6 16:46:36 1998
-# Update Count    : 59
+# Last Modified On: Sun Jun  7 13:34:49 1998
+# Update Count    : 69
 # Status          : Unknown, Use with caution!
 
 ################ Common stuff ################
 
 use strict;
-use Getopt::Long;
+use Getopt::Long 2.1;
 
-# $LIBDIR = $ENV{"PUXLIB"} || "/usr/local/lib/pux";
-# unshift (@INC, $LIBDIR);
-# require "common.pl";
-my $my_package = "PUX";
+my $my_package = "Sciurix";
+
+my ($VERSION);
+# The next line is for MakeMaker.
+($VERSION) = '$ Revision: 1.1 $ ' =~ /: ([\d.]+)/;
+
 my ($my_name, $my_version) = $RCS_Id =~ /: (.+).pl,v ([\d.]+)/;
 $my_version .= '*' if length('$Locker$ ') > 12;
 
@@ -168,7 +172,7 @@ foreach $eps_file ( @ARGV ) {
 	}
     }
     else {
-	print STDERR ("Unhandled output type: $format\n");
+	print STDERR ("ASSERT ERROR: Unhandled output type: $format\n");
 	exit (1);
     }
 
@@ -201,6 +205,10 @@ sub set_out_type () {
     elsif ( $opt =~ /^(jpg|jpeg)(gray)?$/ ) {
 	$format = 'jpg';
 	$gs_format = 'jpeg'.(defined $2 ? $2 : '');
+    }
+    else {
+	print STDERR ("ASSERT ERROR: Invalid value to set_out_type: $opt\n");
+	exit (1);
     }
 }
 
