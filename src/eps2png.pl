@@ -5,8 +5,8 @@ my $RCS_Id = '$Id$ ';
 # Author          : Johan Vromans
 # Created On      : Tue Sep 15 15:59:04 1992
 # Last Modified By: Johan Vromans
-# Last Modified On: Mon Jul 10 17:06:25 2000
-# Update Count    : 73
+# Last Modified On: Mon Jul 10 17:25:27 2000
+# Update Count    : 74
 # Status          : Unknown, Use with caution!
 
 ################ Common stuff ################
@@ -269,3 +269,78 @@ EndOfUsage
 }
 __END__
 
+=pod
+
+=head1 NAME
+
+epf2png - convert EPS files to PNG, JPG or GIF images
+
+=head1 SYNOPSIS
+
+    eps2png [ options ] files ...
+    eps2gif [ options ] files ...
+    eps2jpg [ options ] files ...
+
+=head1 DESCRIPTION
+
+Converts files from EPS format (Encapsulated PostScript) to some
+popular image formats.
+
+If installed as C<eps2png> (the default), it produces PNG images by
+default. Likewise, C<eps2gif> defaults to GIF images and C<eps2jpg>
+defaults to JPG. Note that the normal installation procedure will
+I<only> install C<eps2png>.
+
+It uses GhostScript to produce the images. Since modern GhostScript
+programs do not support GIF anymore, GIF images are produced via the
+Portable PixMap converters (PBM-package).
+
+=head1 ARGUMENTS
+
+    -png -pngmono -pnggray -png16 -png256 -png16m
+                        produce PNG image
+    -jpg -jpggray -jpeg -jpeggray
+                        produce JPG image
+    -gif -gifmono       produce GIF image
+    -[no]mono		monochrome/colour rendition
+    -res XXX		resolution (default = 82)
+    -scale XXX		scaling factor
+    -[no]pbm		GIF only: [do not] convert via pbm format
+    -output XXX		output to this file (only one input file)
+    -[no]keep		[do not] keep temp files
+    -help		this message
+    -ident		show identification
+    -verbose		verbose information
+
+
+=head1 AUTHOR
+
+Johan Vromans, E<lt>jvromans@squirrel.nlE<gt>.
+
+=head1 BUGS
+
+GhostScript and, if required, the PBM package, need to be installed and
+accessible through the user's C<PATH>.
+
+GhostScript is assumed to be capable of handling all the image types
+listed above.
+
+=head1 COPYRIGHT AND DISCLAIMER
+
+This program is Copyright 1994,2000 by Johan Vromans.
+This program is free software; you can redistribute it and/or
+modify it under the terms of the Perl Artistic License or the
+GNU General Public License as published by the Free Software
+Foundation; either version 2 of the License, or (at your option) any
+later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+If you do not have a copy of the GNU General Public License write to
+the Free Software Foundation, Inc., 675 Mass Ave, Cambridge,
+MA 02139, USA.
+
+=cut
