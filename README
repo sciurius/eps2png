@@ -1,0 +1,98 @@
+epf2png converts files from EPS format (Encapsulated PostScript) to
+some popular image formats.
+
+It uses GhostScript to produce the images. Since modern GhostScript
+programs do not support GIF anymore, GIF images are produced via the
+Portable BitMap converters (PBM-package).
+
+This program is distributed under the Perl Artistic License.
+
+     Johan Vromans <jvromans@squirrel.nl>
+
+INSTALLATION
+------------
+
+ * Prerequisites: - Unix
+		  - Perl5.004
+		  - a GhostScript installation that can handle the
+		    desired output formats (use `gs -h' to get a list of
+		    supported formats)
+		  - if you want GIF format and your GhostScript cannot
+		    produce this, the Portable BitMap package (pbmplus
+		    or netpbm)
+
+The program is distributed in the form of a gzipped tar (.tar.gz)
+file. Unpack this file in a scratch directory:
+
+  % gzip -d < eps2png-x.y.tar.gz | tar -xvf -
+
+This will create a sub-directory eps2png-x.y. Switch to this
+directory: 
+
+  % cd eps2png-x.y
+
+Execute the following commands. Note that this is the standard
+procedure for Perl extensions and programs:
+
+  % perl Makefile.PL
+  % make all test
+  % make install
+
+The last command requires superuser (root) privilege.
+
+This is an example installation session. Your exact results may vary
+depending on your system and Perl installation:
+
+  % gzip -d < eps2png-1.1.tar.gz | tar -xvf -
+  eps2png-1.1/
+  eps2png-1.1/Makefile.PL
+  eps2png-1.1/eps2png.PL
+  eps2png-1.1/README
+  eps2png-1.1/MANIFEST
+
+  % cd eps2png-1.1/
+
+  % perl Makefile.PL
+  Checking if your kit is complete...
+  Looks good
+  Writing Makefile for eps2png
+
+  % make all test
+  mkdir blib
+  mkdir blib/lib
+  mkdir blib/arch
+  mkdir blib/arch/auto
+  mkdir blib/arch/auto/eps2png
+  mkdir blib/lib/auto
+  mkdir blib/lib/auto/eps2png
+  mkdir blib/man1
+  /usr/bin/perl -Iblib/arch -Iblib/lib -I/usr/lib/perl5/i686-linux/5.00466 -I/usr/lib/perl5 eps2png.PL
+  Extracting eps2png (with variable substitutions)
+  Manifying blib/man1/eps2png.1
+  mkdir blib/script
+  cp eps2png blib/script/eps2png
+  /usr/bin/perl -I/usr/lib/perl5/i686-linux/5.00466 -I/usr/lib/perl5 -MExtUtils::MakeMaker -e "MY->fixin(shift)" blib/script/eps2png
+  No tests defined for eps2png extension.
+
+  % su
+  Password:
+
+  # make install
+  Installing /usr/man/man1/eps2png.1
+  Installing /usr/bin/eps2png
+  Writing /usr/lib/perl5/site_perl/i686-linux/auto/eps2png/.packlist
+  Appending installation info to /usr/lib/perl5/i686-linux/5.00466/perllocal.pod
+
+ADDITIONAL LINKS
+----------------
+
+The program is installed under the name eps2png. When invoked like
+this, it produces PNG images by default.
+You may install it under alternative names (or create links) for other
+default image formats:
+
+  eps2gif    -- will produce GIF images by default
+  eps2jpg    -- will produce JPEG images by default
+
+Note that, in any case, the desired output format can be selected
+using command line options.
