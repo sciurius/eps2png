@@ -5,8 +5,8 @@ my $RCS_Id = '$Id$ ';
 # Author          : Johan Vromans
 # Created On      : Tue Sep 15 15:59:04 1992
 # Last Modified By: Johan Vromans
-# Last Modified On: Sun Jun 24 17:07:29 2001
-# Update Count    : 155
+# Last Modified On: Thu Jun  1 16:20:02 2006
+# Update Count    : 157
 # Status          : Okay
 
 ################ Common stuff ################
@@ -328,7 +328,7 @@ __END__
 
 =head1 NAME
 
-epf2png - convert EPS files to PNG, JPG or GIF images
+eps2png - convert EPS files to PNG, JPG or GIF images
 
 =head1 SYNOPSIS
 
@@ -476,7 +476,7 @@ The EPS should be well-behaving.
 
 =head1 COPYRIGHT AND DISCLAIMER
 
-This program is Copyright 1994,2001 by Johan Vromans.
+This program is Copyright 1994,2006 by Johan Vromans.
 This program is free software; you can redistribute it and/or
 modify it under the terms of the Perl Artistic License or the
 GNU General Public License as published by the Free Software
