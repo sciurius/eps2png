@@ -5,8 +5,8 @@ my $RCS_Id = '$Id$ ';
 # Author          : Johan Vromans
 # Created On      : Tue Sep 15 15:59:04 1992
 # Last Modified By: Johan Vromans
-# Last Modified On: Thu Jun  1 16:20:02 2006
-# Update Count    : 157
+# Last Modified On: Thu Jul  6 17:10:06 2006
+# Update Count    : 158
 # Status          : Okay
 
 ################ Common stuff ################
@@ -230,7 +230,7 @@ sub mysystem {
 
 sub set_out_type {
     my ($opt) = lc (shift (@_));
-    if ( $opt =~ /^png(mono|gray|16|256|16m)?$/ ) {
+    if ( $opt =~ /^png(mono|gray|16|256|16m|alpha)?$/ ) {
 	$format = 'png';
 	$gs_format = $format.(defined $1 ? $1 : '16m');
     }
@@ -269,6 +269,7 @@ sub handle_options {
 			     'png16'	   => \&set_out_type,
 			     'png256'	   => \&set_out_type,
 			     'png16m'	   => \&set_out_type,
+			     'pngalpha'	   => \&set_out_type,
 			     'jpg'	   => \&set_out_type,
 			     'jpggray'	   => \&set_out_type,
 			     'jpeg'	   => \&set_out_type,
@@ -298,7 +299,7 @@ sub usage {
 This is $my_package [$my_name $my_version]
 Usage: $0 [options] file [...]
 
-    -png -pngmono -pnggray -png16 -png256 -png16m
+    -png -pngmono -pnggray -png16 -png256 -png16m -pngalpha
                         produce PNG image
     -jpg -jpggray -jpeg -jpeggray
                         produce JPG image
@@ -362,7 +363,7 @@ so on.
 
 =over 4
 
-=item B<-png -pngmono -pnggray -png16 -png256 -png16m>
+=item B<-png -pngmono -pnggray -png16 -png256 -png16m -pngalpha>
 
 Each of these options will instruct Ghostscript to use the
 corresponding bitmap generator, and supply a C<.png> default
