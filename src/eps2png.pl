@@ -5,8 +5,8 @@ my $RCS_Id = '$Id$ ';
 # Author          : Johan Vromans
 # Created On      : Tue Sep 15 15:59:04 1992
 # Last Modified By: Johan Vromans
-# Last Modified On: Thu Jul  6 17:10:06 2006
-# Update Count    : 158
+# Last Modified On: Thu Jul  6 17:40:32 2006
+# Update Count    : 159
 # Status          : Okay
 
 ################ Common stuff ################
@@ -477,7 +477,7 @@ The EPS should be well-behaving.
 
 =head1 COPYRIGHT AND DISCLAIMER
 
-This program is Copyright 1994,2006 by Johan Vromans.
+This program is Copyright 1994 by Johan Vromans.
 This program is free software; you can redistribute it and/or
 modify it under the terms of the Perl Artistic License or the
 GNU General Public License as published by the Free Software
