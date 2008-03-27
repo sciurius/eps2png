@@ -1,9 +1,13 @@
 #!/usr/bin/perl
 # $Id$
 
-print "1..5\n";
+use Test::More;
+plan tests => 5;
 
-eval { require "t/basic.pl"; };
-print "$@\nnot ok 1\n" if $@;
+require_ok "t/basic.pl";
 
-testit ("gif");
+SKIP: {
+    skip "GhostScript (gs) not available", 4
+      unless findbin("gs");
+    testit("gif");
+}
