@@ -2,8 +2,8 @@
 # Author          : Johan Vromans
 # Created On      : Sat Jun  6 16:08:33 1998
 # Last Modified By: Johan Vromans
-# Last Modified On: Thu Mar 27 15:51:15 2008
-# Update Count    : 49
+# Last Modified On: Thu Mar 27 16:21:55 2008
+# Update Count    : 51
 # Status          : Released
 
 use strict;
@@ -55,6 +55,7 @@ foreach my $type ( qw(gif gifmono) ) {
     $needpbm = 1;
 }
 
+my $x =
 WriteMakefile
   (
    NAME         => "$scripts[0]",
@@ -80,4 +81,46 @@ while ( <$src> ) {
 close($dst);
 close($src);
 
+WriteSpecfile($x->{NAME}, $x->{VERSION});
+
 1;
+
+sub WriteSpecfile {
+    my $name    = shift;
+    my $version = shift;
+
+    vcopy( _tag	    => "RPM spec file",
+	   _dst	    => "$name.spec",
+	   pkgname  => $name,
+	   version  => $version,
+	 );
+}
+
+sub vcopy {
+    my (%ctrl) = @_;
+
+    $ctrl{_src} ||= $ctrl{_dst} . ".in";
+
+    return unless open(my $fh, "<", $ctrl{_src});
+
+    print("Writing ", $ctrl{_tag}, "...\n") if $ctrl{_tag};
+
+    my $newfh;
+    open ($newfh, ">", $ctrl{_dst})
+      or die($ctrl{_dst}, ": $!\n");
+
+    my $pat = "(";
+    foreach ( grep { ! /^_/ } keys(%ctrl) ) {
+	$pat .= quotemeta($_) . "|";
+    }
+    chop($pat);
+    $pat .= ")";
+
+    $pat = qr/\[\%\s+$pat\s+\%\]/;
+
+    while ( <$fh> ) {
+	s/$pat/$ctrl{$1}/ge;
+	print { $newfh } $_;
+    }
+    close($newfh);
+}
