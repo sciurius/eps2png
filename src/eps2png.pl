@@ -5,8 +5,8 @@ my $RCS_Id = '$Id$ ';
 # Author          : Johan Vromans
 # Created On      : Tue Sep 15 15:59:04 1992
 # Last Modified By: Johan Vromans
-# Last Modified On: Thu Mar 27 16:06:22 2008
-# Update Count    : 165
+# Last Modified On: Wed May 20 15:55:08 2009
+# Update Count    : 175
 # Status          : Okay
 
 ################ Common stuff ################
@@ -60,6 +60,7 @@ $verbose |= $trace;
 my $eps_file;
 my $err = 0;
 
+FILE:
 foreach $eps_file ( @ARGV ) {
 
     unless ( open (EPS, $eps_file) ) {
@@ -100,7 +101,7 @@ foreach $eps_file ( @ARGV ) {
 		}
 		else {
 		    $yscale = $xscale;
-		    $height = ($4 - $2) * $yscale;
+		    $height = int( ($4 - $2) * $yscale + 0.5 );
 		}
 	    }
 	    elsif ( defined $height ) {
@@ -111,7 +112,7 @@ foreach $eps_file ( @ARGV ) {
 		}
 		else {
 		    $xscale = $yscale;
-		    $width = ($3 - $1) * $xscale;
+		    $width = int( ($3 - $1) * $xscale + 0.5 );
 		}
 	    }
 	    unless ( defined $xscale ) {
@@ -152,7 +153,7 @@ foreach $eps_file ( @ARGV ) {
     unless ( $gotbb ) {
 	print STDERR ("No bounding box in $eps_file\n");
 	$err++;
-	return;
+	next FILE;
     }
 
     my $out_file;		# output file
