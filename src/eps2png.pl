@@ -1,12 +1,10 @@
 #!/usr/bin/perl
 
-my $RCS_Id = '$Id$ ';
-
 # Author          : Johan Vromans
 # Created On      : Tue Sep 15 15:59:04 1992
 # Last Modified By: Johan Vromans
-# Last Modified On: Wed May 20 15:55:08 2009
-# Update Count    : 175
+# Last Modified On: Thu Jan  2 09:49:41 2020
+# Update Count    : 182
 # Status          : Okay
 
 ################ Common stuff ################
@@ -15,11 +13,9 @@ use strict;
 use Getopt::Long 2.1;
 
 my $my_package = "Sciurix";
-my ($my_name, $my_version) = $RCS_Id =~ /: (.+).pl,v ([\d.]+)/;
-$my_version .= '*' if length('$Locker$ ') > 12;
-
+my ($my_name, $my_version) = qw( eps2png 2.7 );
 use vars qw($VERSION);
-( $VERSION ) = '$Revision$ ' =~ /\$Revision:\s+([^\s]+)/;
+$VERSION = $my_version;
 
 ################ Program parameters ################
 
@@ -308,23 +304,23 @@ sub usage {
 This is $my_package [$my_name $my_version]
 Usage: $0 [options] file [...]
 
-    -png -pngmono -pnggray -png16 -png256 -png16m -pngalpha
+    --png --pngmono --pnggray --png16 --png256 --png16m --pngalpha
                         produce PNG image
-    -jpg -jpggray -jpeg -jpeggray
+    --jpg --jpggray --jpeg --jpeggray
                         produce JPG image
-    -gif -gifmono       produce GIF image
-    -[no]mono		monochrome/colour rendition
-    -width XXX		desired with
-    -height XXX		desired height
-    -resolution XXX	resolution (default = $res)
-    -scale XXX		scaling factor
-    -antialias XX	antialias factor (must be 0, 1, 2, 4 or 8; default: 4)
-    -noantialias	no antialiasing (same as -antialias 0)
-    -[no]pbm		GIF only: [do not] convert via pbm format
-    -output XXX		output to this file (only one input file)
-    -help		this message
-    -ident		show identification
-    -verbose		verbose information
+    --gif --gifmono	produce GIF image
+    --[no]mono		monochrome/colour rendition
+    --width XXX		desired with
+    --height XXX	desired height
+    --resolution XXX	resolution (default = $res)
+    --scale XXX		scaling factor
+    --antialias XX	antialias factor (must be 0, 1, 2, 4 or 8; default: 4)
+    --noantialias	no antialiasing (same as --antialias 0)
+    --[no]pbm		GIF only: [do not] convert via pbm format
+    --output XXX	output to this file (only one input file)
+    --help		this message
+    --ident		show identification
+    --verbose		verbose information
 EndOfUsage
     exit 1;
 }
@@ -472,7 +468,7 @@ Provides more verbose information.
 
 =head1 AUTHOR
 
-Johan Vromans, <jvromans@squirrel.nl>.
+Johan Vromans, <jv@cpan.org>.
 
 =head1 BUGS
 
@@ -484,22 +480,21 @@ listed above.
 
 The EPS should be well-behaving.
 
+Development of this program takes place on GitHub:
+https://github.com/sciurius/eps2png.
+
+You can find documentation for this module with the perldoc command.
+
+    perldoc eps2png
+
+Please report any bugs or feature requests using the issue tracker on
+GitHub.
+
 =head1 COPYRIGHT AND DISCLAIMER
 
-This program is Copyright 1994,2008 by Johan Vromans.
-This program is free software; you can redistribute it and/or
-modify it under the terms of the Perl Artistic License or the
-GNU General Public License as published by the Free Software
-Foundation; either version 2 of the License, or (at your option) any
-later version.
+This program is Copyright 1994,2008,2020 by Johan Vromans.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-If you do not have a copy of the GNU General Public License write to
-the Free Software Foundation, Inc., 675 Mass Ave, Cambridge,
-MA 02139, USA.
+This program is free software; you can redistribute it and/or modify it
+under the same terms as Perl itself.
 
 =cut

@@ -1,5 +1,4 @@
 #!/usr/bin/perl
-# $Id$
 
 use Test::More;
 plan tests => 5;

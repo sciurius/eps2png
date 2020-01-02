@@ -1,5 +1,3 @@
-# $Id$
-
 sub differ {
     # Perl version of the 'cmp' program.
     # Returns 1 if the files differ, 0 if the contents are equal.
