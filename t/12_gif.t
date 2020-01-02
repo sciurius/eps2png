@@ -8,5 +8,7 @@ require_ok "t/basic.pl";
 SKIP: {
     skip "GhostScript (gs) not available", 4
       unless findbin("gs");
+    skip "NetPBM (ppmtogif) not available", 4
+      unless findbin("ppmtogif");
     testit("gif");
 }
