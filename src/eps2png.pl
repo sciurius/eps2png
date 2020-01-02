@@ -3,8 +3,8 @@
 # Author          : Johan Vromans
 # Created On      : Tue Sep 15 15:59:04 1992
 # Last Modified By: Johan Vromans
-# Last Modified On: Thu Jan  2 09:49:41 2020
-# Update Count    : 182
+# Last Modified On: Thu Jan  2 10:25:57 2020
+# Update Count    : 186
 # Status          : Okay
 
 ################ Common stuff ################
@@ -13,9 +13,8 @@ use strict;
 use Getopt::Long 2.1;
 
 my $my_package = "Sciurix";
-my ($my_name, $my_version) = qw( eps2png 2.7 );
-use vars qw($VERSION);
-$VERSION = $my_version;
+my $my_name = "eps2png";
+our $VERSION = 2.7;
 
 ################ Program parameters ################
 
@@ -289,7 +288,7 @@ sub handle_options {
 			     'debug'	   => \$debug)
 	    && !$help;
     }
-    print STDERR ("This is $my_package [$my_name $my_version]\n")
+    print STDERR ("This is $my_package [$my_name $VERSION]\n")
 	if $ident;
     die ("Only one file argument is allowed when -output is used\n")
       if @ARGV > 1 && defined $output;
@@ -301,7 +300,7 @@ sub handle_options {
 
 sub usage {
     print STDERR <<EndOfUsage;
-This is $my_package [$my_name $my_version]
+This is $my_package [$my_name $VERSION]
 Usage: $0 [options] file [...]
 
     --png --pngmono --pnggray --png16 --png256 --png16m --pngalpha
@@ -368,17 +367,17 @@ so on.
 
 =over 4
 
-=item B<-png -pngmono -pnggray -png16 -png256 -png16m -pngalpha>
+=item B<--png --pngmono --pnggray --png16 --png256 --png16m --pngalpha>
 
 Each of these options will instruct Ghostscript to use the
 corresponding bitmap generator, and supply a C<.png> default
 extension for output files.
 
-=item B<-jpg -jpggray -jpeg -jpeggray>
+=item B<--jpg --jpggray --jpeg --jpeggray>
 
 Same, but with a C<.jpg> default extension for output files.
 
-=item B<-gif -gifmono>
+=item B<--gif --gifmono>
 
 Same, but with a C<.gif> default extension for output files.
 
@@ -387,80 +386,80 @@ format due to copyright restrictions, B<eps2png> will request
 Ghostscript to produce a Portable Bitmap File (.ppm or .pbm) instead
 and run the B<ppmtogif> converter to produce the actual GIF file.
 
-=item B<-mono>
+=item B<--mono>
 
 This option will select monochrome (BW or gray) output. It forces the
 Ghostscript driver to C<pngmono>, C<jpeggray>, C<pbm>, or C<gifmono>.
 
-=item B<-nomono>
+=item B<--nomono>
 
 Produces colour images. This is the default.
 
-=item B<-width> I<NN>
+=item B<--width> I<NN>
 
 The desired width of the output image.
 
-If B<-height> is not specified, the image will be scaled proportionally.
+If B<--height> is not specified, the image will be scaled proportionally.
 
-=item B<-height> I<NN>
+=item B<--height> I<NN>
 
 The desired height of the output image.
 
-If B<-width> is not specified, the image will be scaled proportionally.
+If B<--width> is not specified, the image will be scaled proportionally.
 
-=item B<-resolution> I<NN>
+=item B<--resolution> I<NN>
 
 Specifies the resolution for the output image. This is the width, in
 pixels, of the bitmap image for an EPS image of one inch wide (72
 PostScript points).
 
-Note that for best results, use the B<-width> and B<-height> options
+Note that for best results, use the B<--width> and B<--height> options
 instead.
 
 Default value is 82, which causes the converted image to be of more
 or less the same size as the EPS image. On my screen, that is.
 
-=item B<-scale> I<NN>
+=item B<--scale> I<NN>
 
 Specify a scaling factor. This may be a fractional number.
 
 For a one-inch EPS image, the resultant bitmap image will be
 I<scale> times I<resolution>.
 
-Note that for best results, use the B<-width> and B<-height> options
+Note that for best results, use the B<--width> and B<--height> options
 instead.
 
-=item B<-antialias> I<NN>
+=item B<--antialias> I<NN>
 
 Sets the antialiasing depth. I<NN> must be 0 (no antialiasing), 1, 2,
 4, or 8. Default value is 4.
 
-=item B<-noantialias>
+=item B<--noantialias>
 
 Sets the antialiasing depth to 0.
 
-=item B<-pbm>
+=item B<--pbm>
 
 Forces GIF conversion through the PBM converters.
 
-=item B<-nopbm>
+=item B<--nopbm>
 
 Forces GIF conversion through Ghostscript.
 
-=item B<-output> I<XXX>
+=item B<--output> I<XXX>
 
 Stores the output in this file. Only one input file may be supplied if
 this option is specified.
 
-=item B<-help>
+=item B<--help>
 
 Prints a help message and exits.
 
-=item B<-ident>
+=item B<--ident>
 
 Prints the program version before doing anything else.
 
-=item B<-verbose>
+=item B<--verbose>
 
 Provides more verbose information.
 
@@ -492,7 +491,7 @@ GitHub.
 
 =head1 COPYRIGHT AND DISCLAIMER
 
-This program is Copyright 1994,2008,2020 by Johan Vromans.
+This program is Copyright 1992,2008,2020 by Johan Vromans.
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.

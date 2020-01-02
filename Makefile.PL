@@ -2,16 +2,20 @@
 # Author          : Johan Vromans
 # Created On      : Sat Jun  6 16:08:33 1998
 # Last Modified By: Johan Vromans
-# Last Modified On: Thu Mar 27 16:21:55 2008
-# Update Count    : 51
+# Last Modified On: Thu Jan  2 10:24:44 2020
+# Update Count    : 58
 # Status          : Released
+
+# Ease the life of the CPAN testers.
+exit 0 if $ENV{AUTOMATED_TESTING} && $] < 5.010000;
 
 use strict;
 use warnings;
 use Config;
-use ExtUtils::MakeMaker;
+# EU::MM 6.5503 is the first version to understand *_REQUIRES.
+use ExtUtils::MakeMaker 6.5503;
 
-my @scripts = qw (eps2png);
+my @scripts = qw( eps2png );
 my $usrbin = "/usr/bin";
 my $installscript = $Config{installscript};
 
@@ -55,17 +59,49 @@ foreach my $type ( qw(gif gifmono) ) {
     $needpbm = 1;
 }
 
+my $master = 'src/eps2png.pl';
+my $version = MM->parse_version($master);
+
 my $x =
-WriteMakefile
-  (
-   NAME         => "$scripts[0]",
-   VERSION_FROM => "src/$scripts[0].pl",
-   ($] >= 5.005) ?
-   ( AUTHOR	=> 'Johan Vromans (jvromans@squirrel.nl)',
-     ABSTRACT	=> 'Convert EPS files to PNG, JPG or GIF' ) : (),
-   PREREQ_PM	=> { 'Getopt::Long' => 2.1 },
-   EXE_FILES    => [ map { "script/$_" } @scripts ],
- );
+WriteMakefile(
+    NAME                => 'eps2png',
+    AUTHOR              => 'Johan Vromans <jv@cpan.org>',
+    VERSION	        => $version,
+    ABSTRACT_FROM       => $master,
+    LICENSE		=> 'perl',
+    PL_FILES            => {},
+    EXE_FILES		=> [ map { "script/$_" } @scripts ],
+    MIN_PERL_VERSION	=> '5.010000',
+
+    CONFIGURE_REQUIRES => {
+        "ExtUtils::MakeMaker" => 6.5503,
+    },
+
+#   BUILD_REQUIRES => {
+#   },
+
+    TEST_REQUIRES  => {
+      'Test::More'  => 0,
+    },
+
+    META_MERGE => {
+      resources    => {
+        repository => {
+          type => 'git',
+	   web  => 'https://github.com/sciurius/eps2png',
+	   url  => 'https://github.com/sciurius/eps2png.git',
+	 },
+	 bugtracker => "https://github.com/sciurius/eps2png/issues",
+	},
+	'meta-spec' => {
+	  version => '2',
+	  url     => 'https://metacpan.org/pod/CPAN::Meta::Spec',
+	},
+      provides => {
+	eps2png => { file => "script/eps2png", version => $version },
+      }
+    }
+);
 
 warn("Creating script\n");
 open(my $src, "<", "src/eps2png.pl")

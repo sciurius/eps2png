@@ -4,15 +4,21 @@ use Test::More;
 
 sub testit {
     my ($type) = @_;
-    my $out = "t/x1.out";
+    my $out = "t/x1_$type.out";
     my $ref = "t/x1.$type";
 
-    @ARGV = ( "-$type", "-output", $out, "t/x1.eps" );
+    @ARGV = ( "--$type", "-output", $out, "t/x1.eps" );
     require_ok "blib/script/eps2png";
 
-    ok(-s $out, " created: $out");
-    is(-s $out, , -s $ref, "size check");
-    ok(!differ($ref, $out), "content check");
+    ok(-s $out, "created: $out");
+    is(-s $out, -s $ref, "size check");
+    if( differ($ref, $out) ) {
+	ok( 0, "content check");
+    }
+    else {
+	ok( 1, "content check");
+	unlink($out);
+    }
 }
 
 sub differ {

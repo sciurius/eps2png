@@ -78,13 +78,13 @@ AVAILABILITY
 
 eps2png:
 
-  http://search.cpan.org/search?mode=dist&query=eps2png
-  http://johan.vromans.org/software/sw_eps2png.html
+  https://metacpan.org/search?mode=dist&query=eps2png
+  https://johan.vromans.org/software/sw_eps2png.html
 
 Ghostscript:
 
-  http://www.ghostscript.org (GNU Ghostscript)
-  http://sourceforge.net/projects/ghostscript (AFPL Ghostscript)
+  https://www.ghostscript.com (GNU Ghostscript)
+  https://git.ghostscript.com (AFPL Ghostscript)
 
 Portable BitMap package:
 
@@ -94,6 +94,6 @@ Portable BitMap package:
 ----------------------------------------------------------------------------
 Johan Vromans                                           jvromans@squirrel.nl
 Squirrel Consultancy                                  Exloo, the Netherlands
-http://www.squirrel.nl                              http://johan.vromans.org
-PGP Key 1024D/1298C2B4                  http://johan.vromans.org/pgpkey.html
+https://www.squirrel.nl                            https://johan.vromans.org
+PGP Key 1024D/1298C2B4                 https://johan.vromans.org/pgpkey.html
 ----------------------- "Arms are made for hugging" ------------------------
