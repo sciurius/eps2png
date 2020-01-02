@@ -3,8 +3,8 @@
 # Author          : Johan Vromans
 # Created On      : Tue Sep 15 15:59:04 1992
 # Last Modified By: Johan Vromans
-# Last Modified On: Thu Jan  2 10:53:08 2020
-# Update Count    : 187
+# Last Modified On: Thu Jan  2 19:48:11 2020
+# Update Count    : 199
 # Status          : Okay
 
 ################ Common stuff ################
@@ -14,7 +14,7 @@ use Getopt::Long 2.1;
 
 my $my_package = "Sciurix";
 my $my_name = "eps2png";
-our $VERSION = 2.8;
+our $VERSION = 2.9;
 
 ################ Program parameters ################
 
@@ -54,6 +54,14 @@ $verbose |= $trace;
 
 my $eps_file;
 my $err = 0;
+
+my $gv = `gs --version`;
+if ( $gv =~ /^(\d+)\.(\d+)/ ) {
+    $gv = sprintf("%03d%03d", $1, $2);
+}
+else {
+    die("Cannot fetch ghostscript version (was ghostscript installed?)\n")
+}
 
 FILE:
 foreach $eps_file ( @ARGV ) {
@@ -172,6 +180,7 @@ foreach $eps_file ( @ARGV ) {
     print STDERR ("Creating $out_file\n") if $verbose;
 
     my $gs0 = "gs -q -dNOPAUSE -r$res -g${width}x$height";
+    $gs0 .= " --permit-file-read=\"$eps_file\"" if $gv > "009027";
     my $gs1 = "-";
     $gs0 .= " -dTextAlphaBits=$antialias -dGraphicsAlphaBits=$antialias"
       if $antialias;

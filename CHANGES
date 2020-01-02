@@ -3,6 +3,10 @@ Release
 
  * Miscellaneous updates for SPEC generation and RPM building.
 
+ * Skip GIF tests if no NetPBM installed.
+
+ * Fix problem with ghoscript >= 9.50.
+
 Release 2.8, Thu Mar 20, 2020
 =============================
 
