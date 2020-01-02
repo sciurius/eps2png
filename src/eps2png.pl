@@ -3,8 +3,8 @@
 # Author          : Johan Vromans
 # Created On      : Tue Sep 15 15:59:04 1992
 # Last Modified By: Johan Vromans
-# Last Modified On: Thu Jan  2 10:25:57 2020
-# Update Count    : 186
+# Last Modified On: Thu Jan  2 10:53:08 2020
+# Update Count    : 187
 # Status          : Okay
 
 ################ Common stuff ################
@@ -14,7 +14,7 @@ use Getopt::Long 2.1;
 
 my $my_package = "Sciurix";
 my $my_name = "eps2png";
-our $VERSION = 2.7;
+our $VERSION = 2.8;
 
 ################ Program parameters ################
 

@@ -10,7 +10,7 @@ This program is distributed under the Perl Artistic License and the GPL.
 PREREQUISITES
 -------------
 
-Perl5.004 or better.
+Perl 5.10.1 or better. Older perls may work but have not been tested.
 
 Unix (although it is rumoured to work on Windows).
 
