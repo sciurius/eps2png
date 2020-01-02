@@ -1,4 +1,4 @@
-epf2png converts files from EPS format (Encapsulated PostScript) to
+eps2png converts files from EPS format (Encapsulated PostScript) to
 PNG (Portable Network Graphics), JPEG or GIF formats.
 
 It uses Ghostscript to produce the images. Since modern GhostScript
