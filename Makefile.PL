@@ -2,12 +2,12 @@
 # Author          : Johan Vromans
 # Created On      : Sat Jun  6 16:08:33 1998
 # Last Modified By: Johan Vromans
-# Last Modified On: Thu Jan  2 10:24:44 2020
-# Update Count    : 58
+# Last Modified On: Thu Jan  2 15:18:26 2020
+# Update Count    : 65
 # Status          : Released
 
 # Ease the life of the CPAN testers.
-exit 0 if $ENV{AUTOMATED_TESTING} && $] < 5.010000;
+exit 0 if $ENV{AUTOMATED_TESTING} && $] < 5.010001;
 
 use strict;
 use warnings;
@@ -59,12 +59,17 @@ foreach my $type ( qw(gif gifmono) ) {
     $needpbm = 1;
 }
 
-my $master = 'src/eps2png.pl';
+my $name = 'eps2png';
+my $master = "src/${name}.pl";
 my $version = MM->parse_version($master);
+unless ( -f "${name}.spec" ) {
+    open( my $fd, ">", "${name}.spec" );
+    print $fd "Placeholder, will be overwritten by Makefile.PL.\n";
+    close($fd);
+}
 
-my $x =
 WriteMakefile(
-    NAME                => 'eps2png',
+    NAME                => $name,
     AUTHOR              => 'Johan Vromans <jv@cpan.org>',
     VERSION	        => $version,
     ABSTRACT_FROM       => $master,
@@ -88,26 +93,26 @@ WriteMakefile(
       resources    => {
         repository => {
           type => 'git',
-	   web  => 'https://github.com/sciurius/eps2png',
-	   url  => 'https://github.com/sciurius/eps2png.git',
+	   web  => "https://github.com/sciurius/${name}",
+	   url  => "https://github.com/sciurius/${name}.git",
 	 },
-	 bugtracker => "https://github.com/sciurius/eps2png/issues",
+	 bugtracker => "https://github.com/sciurius/${name}/issues",
 	},
 	'meta-spec' => {
 	  version => '2',
 	  url     => 'https://metacpan.org/pod/CPAN::Meta::Spec',
 	},
       provides => {
-	eps2png => { file => "script/eps2png", version => $version },
+	eps2png => { file => "script/${name}", version => $version },
       }
     }
 );
 
 warn("Creating script\n");
-open(my $src, "<", "src/eps2png.pl")
-  or die("src/eps2png.pl: $!\n");
-open(my $dst, ">", "script/eps2png")
-  or die("script/eps2png: $!\n");
+open(my $src, "<", "src/${name}.pl")
+  or die("src/${name}.pl: $!\n");
+open(my $dst, ">", "script/${name}")
+  or die("script/${name}: $!\n");
 
 while ( <$src> ) {
     s/my \$use_pbm = .;/my \$use_pbm = $needpbm;/;
@@ -117,18 +122,22 @@ while ( <$src> ) {
 close($dst);
 close($src);
 
-WriteSpecfile($x->{NAME}, $x->{VERSION});
+WriteSpecfile( $name, $version );
 
 1;
+
+use POSIX 'strftime';
 
 sub WriteSpecfile {
     my $name    = shift;
     my $version = shift;
+    my @tm = localtime;
 
     vcopy( _tag	    => "RPM spec file",
 	   _dst	    => "$name.spec",
 	   pkgname  => $name,
 	   version  => $version,
+	   rpmdate  => strftime("%a %b %e %Y", @tm),
 	 );
 }
 
