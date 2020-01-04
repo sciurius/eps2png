@@ -1,9 +1,11 @@
+#! perl
+
 # Makefile.PL -- Makefile for eps2png
 # Author          : Johan Vromans
 # Created On      : Sat Jun  6 16:08:33 1998
 # Last Modified By: Johan Vromans
-# Last Modified On: Thu Jan  2 15:18:26 2020
-# Update Count    : 65
+# Last Modified On: Fri Jan  3 14:42:49 2020
+# Update Count    : 79
 # Status          : Released
 
 # Ease the life of the CPAN testers.
@@ -43,6 +45,11 @@ unless ( $gs =~ /^available devices:/im ) {
     warn("Ghostscript not found. Cannot continue\n");
     exit 0;
 }
+my $gv;
+if ( $gs =~ /ghostscript\s+(\d+\.\d+.*?)\s+/i ) {
+    $gv = $1;
+    print STDERR ("Ghostscript version $gv detected.\n");
+}
 
 foreach my $type ( qw(pngmono pnggray png16 png256 pngalpha jpeggray) ) {
     next if $gs =~ / $type( |$)/m;
@@ -59,9 +66,20 @@ foreach my $type ( qw(gif gifmono) ) {
     $needpbm = 1;
 }
 
+if ( $needpbm ) {
+    my ( $pbm ) = `ppmtogif --version 2>&1` =~ /pbm version: (.*)/i;
+    if ( $pbm ) {
+	print STDERR ("PBM version $pbm detected.\n");
+    }
+    else {
+	warn("No PBM found. You won't be able to generate GIF images.\n");
+    }
+}
+
 my $name = 'eps2png';
 my $master = "src/${name}.pl";
 my $version = MM->parse_version($master);
+$version .= "01";
 unless ( -f "${name}.spec" ) {
     open( my $fd, ">", "${name}.spec" );
     print $fd "Placeholder, will be overwritten by Makefile.PL.\n";
@@ -76,7 +94,7 @@ WriteMakefile(
     LICENSE		=> 'perl',
     PL_FILES            => {},
     EXE_FILES		=> [ map { "script/$_" } @scripts ],
-    MIN_PERL_VERSION	=> '5.010000',
+    MIN_PERL_VERSION	=> '5.010001',
 
     CONFIGURE_REQUIRES => {
         "ExtUtils::MakeMaker" => 6.5503,
@@ -103,7 +121,7 @@ WriteMakefile(
 	  url     => 'https://metacpan.org/pod/CPAN::Meta::Spec',
 	},
       provides => {
-	eps2png => { file => "script/${name}", version => $version },
+	eps2png => { file => "src/${name}.el", version => $version },
       }
     }
 );
