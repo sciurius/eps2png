@@ -4,10 +4,10 @@ use Test::More;
 
 sub testit {
     my ($type) = @_;
-    my $out = "t/x1_$type.out";
-    my $ref = "t/x1.$type";
+    my $out = "xt/x1_$type.out";
+    my $ref = "xt/x1.$type";
 
-    @ARGV = ( "--$type", "-output", $out, "t/x1.eps" );
+    @ARGV = ( "--$type", "-output", $out, "xt/x1.eps" );
     require_ok "blib/script/eps2png";
 
     ok(-s $out, "created: $out");

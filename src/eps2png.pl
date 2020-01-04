@@ -3,8 +3,8 @@
 # Author          : Johan Vromans
 # Created On      : Tue Sep 15 15:59:04 1992
 # Last Modified By: Johan Vromans
-# Last Modified On: Thu Jan  2 19:48:11 2020
-# Update Count    : 199
+# Last Modified On: Sat Jan  4 22:28:44 2020
+# Update Count    : 202
 # Status          : Okay
 
 ################ Common stuff ################
@@ -14,7 +14,7 @@ use Getopt::Long 2.1;
 
 my $my_package = "Sciurix";
 my $my_name = "eps2png";
-our $VERSION = 2.9;
+our $VERSION = 2.902;
 
 ################ Program parameters ################
 
@@ -262,8 +262,9 @@ sub set_out_type {
 }
 
 sub handle_options {
-    my  ($help) = 0;		# handled locally
-    my ($ident) = 0;		# handled locally
+    my $help = 0;		# handled locally
+    my $ident = 0;		# handled locally
+    my $test = 0;		# handled locally
 
     # Process options.
     if ( @ARGV > 0 && $ARGV[0] =~ /^[-+]/ ) {
@@ -293,6 +294,7 @@ sub handle_options {
 			     'resolution=i' => \$res,
 			     'pbm!'	   => \$use_pbm,
 			     'trace'	   => \$trace,
+			     'test'	   => \$test,
 			     'help'	   => \$help,
 			     'debug'	   => \$debug)
 	    && !$help;
@@ -302,7 +304,7 @@ sub handle_options {
     die ("Only one file argument is allowed when -output is used\n")
       if @ARGV > 1 && defined $output;
     die ("At least one input file name must be specified\n")
-      unless @ARGV;
+      unless @ARGV || $test;
     die ("Antialias value must be 0, 1, 2, 4, or 8\n")
       unless "$antialias" =~ /^[01248]$/;
 }
@@ -343,6 +345,9 @@ __END__
 =head1 NAME
 
 eps2png - convert EPS files to PNG, JPG or GIF images
+
+Converts files from EPS format (Encapsulated PostScript) to some
+popular image formats.
 
 =head1 SYNOPSIS
 

@@ -4,8 +4,8 @@
 # Author          : Johan Vromans
 # Created On      : Sat Jun  6 16:08:33 1998
 # Last Modified By: Johan Vromans
-# Last Modified On: Fri Jan  3 14:42:49 2020
-# Update Count    : 79
+# Last Modified On: Sat Jan  4 22:29:12 2020
+# Update Count    : 81
 # Status          : Released
 
 # Ease the life of the CPAN testers.
@@ -35,7 +35,7 @@ IMPORTANT: This program requires Ghostscript and may require the
 Portable Bitmap package (PBM) for additional conversions.
 
 IMPORTANT: Due to ongoing development of the Ghostscript output
-drivers, some tests may fail. See README for details.
+drivers, some xt tests may fail. See README for details.
 
 EOD
 
@@ -79,7 +79,6 @@ if ( $needpbm ) {
 my $name = 'eps2png';
 my $master = "src/${name}.pl";
 my $version = MM->parse_version($master);
-$version .= "01";
 unless ( -f "${name}.spec" ) {
     open( my $fd, ">", "${name}.spec" );
     print $fd "Placeholder, will be overwritten by Makefile.PL.\n";

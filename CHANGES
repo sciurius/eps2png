@@ -1,11 +1,16 @@
-Release
-=============================
+Release 2.902, Sat Jan 4, 2020
+==============================
 
  * Miscellaneous updates for SPEC generation and RPM building.
 
- * Skip GIF tests if no NetPBM installed.
-
  * Fix problem with ghoscript >= 9.50.
+
+ * Moved tests involving ghostscript graphics to xt/. It is virtually
+   impossible to create tests that compare graphics output given that
+   this output will differ between architectures and ghostscript
+   versions.
+ 
+ * Skip GIF tests if no NetPBM installed.
 
 Release 2.8, Thu Jan  2, 2020
 =============================

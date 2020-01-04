@@ -3,7 +3,7 @@
 use Test::More;
 plan tests => 1 + 5 * 4;
 use lib '.';			# stupid restriction
-require_ok "t/basic.pl";
+require_ok "xt/basic.pl";
 
 testx("x0-120.png",    "-width",      120);
 testx("x0-120.png",    "-height",     120);
@@ -14,11 +14,11 @@ testx("x0-81.png",	 "-resolution", 80);
 my $t = 0;
 
 sub testx{
-    my $out = "t/x0.out";
-    my $ref = "t/".shift;
+    my $out = "xt/x0.out";
+    my $ref = "xt/".shift;
 
     unlink($out);
-    @ARGV = ( @_, "--png", "--output", $out, "t/x0.eps" );
+    @ARGV = ( @_, "--png", "--output", $out, "xt/x0.eps" );
     delete $INC{"blib/script/eps2png"};
     $t++;
     eval "package t$t; require \"blib/script/eps2png\"";

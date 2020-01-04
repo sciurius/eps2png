@@ -3,7 +3,7 @@
 use Test::More;
 plan tests => 5;
 use lib '.';			# stupid restriction
-require_ok "t/basic.pl";
+require_ok "xt/basic.pl";
 
 SKIP: {
     skip "GhostScript (gs) not available", 4
