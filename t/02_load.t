@@ -4,12 +4,7 @@ use strict;
 use warnings;
 use Test::More tests => 1;
 
-if ( -d "t" ) {
-    chdir "t";
-}
+use_ok("App::eps2png");
 
-@ARGV = qw( --test );
-require_ok("../script/eps2png");
-
-diag( "Testing eps2png $::VERSION, Perl $], $^X" );
+diag( "Testing App::eps2png $App::eps2png::VERSION, Perl $], $^X" );
 

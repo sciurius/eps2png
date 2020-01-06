@@ -4,8 +4,8 @@
 # Author          : Johan Vromans
 # Created On      : Sat Jun  6 16:08:33 1998
 # Last Modified By: Johan Vromans
-# Last Modified On: Sat Jan  4 22:29:12 2020
-# Update Count    : 81
+# Last Modified On: Mon Jan  6 21:20:01 2020
+# Update Count    : 87
 # Status          : Released
 
 # Ease the life of the CPAN testers.
@@ -77,7 +77,7 @@ if ( $needpbm ) {
 }
 
 my $name = 'eps2png';
-my $master = "src/${name}.pl";
+my $master = "lib/App/${name}.pm";
 my $version = MM->parse_version($master);
 unless ( -f "${name}.spec" ) {
     open( my $fd, ">", "${name}.spec" );
@@ -113,31 +113,33 @@ WriteMakefile(
 	   web  => "https://github.com/sciurius/${name}",
 	   url  => "https://github.com/sciurius/${name}.git",
 	 },
-	 bugtracker => "https://github.com/sciurius/${name}/issues",
+	bugtracker => "https://github.com/sciurius/${name}/issues",
 	},
-	'meta-spec' => {
-	  version => '2',
-	  url     => 'https://metacpan.org/pod/CPAN::Meta::Spec',
+      'meta-spec' => {
+	version => '2',
+	url     => 'https://metacpan.org/pod/CPAN::Meta::Spec',
 	},
       provides => {
-	eps2png => { file => "src/${name}.el", version => $version },
+	'App::eps2png' => { file => "lib/App/${name}.pm", version => $version },
+	eps2png => { file => "script/${name}", version => $version },
       }
     }
 );
 
 warn("Creating script\n");
-open(my $src, "<", "src/${name}.pl")
-  or die("src/${name}.pl: $!\n");
+open(my $src, "<", "lib/App/${name}.pm")
+  or die("script/${name}: $!\n");
 open(my $dst, ">", "script/${name}")
   or die("script/${name}: $!\n");
 
 while ( <$src> ) {
-    s/my \$use_pbm = .;/my \$use_pbm = $needpbm;/;
+    s/^\$use_pbm = .;/\$use_pbm = $needpbm;/;
     print { $dst } $_;
 }
 
 close($dst);
 close($src);
+chmod( 0755, "script/${name}" );
 
 WriteSpecfile( $name, $version );
 

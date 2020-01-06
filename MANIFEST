@@ -4,8 +4,8 @@ MANIFEST
 Makefile.PL
 eps2png.spec
 eps2png.spec.in
-src/eps2png.pl
-script/.placeholder
+script/eps2png
+lib/App/eps2png.pm
 t/01_prereq.t
 t/02_load.t
 xt/basic.pl

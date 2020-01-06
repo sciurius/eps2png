@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 
 use Test::More;
-plan tests => 5;
+plan tests => 6;
 use lib '.';			# stupid restriction
 require_ok "xt/basic.pl";
 

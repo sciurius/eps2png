@@ -9,7 +9,7 @@ sub testit {
 
     @ARGV = ( "--$type", "-output", $out, "xt/x1.eps" );
     require_ok "blib/script/eps2png";
-
+    ok( App::eps2png->run(), "run" );
     ok(-s $out, "created: $out");
     is(-s $out, -s $ref, "size check");
     if( differ($ref, $out) ) {

@@ -1,11 +1,15 @@
 #!/usr/bin/perl
 
+package App::eps2png;
+
 # Author          : Johan Vromans
 # Created On      : Tue Sep 15 15:59:04 1992
 # Last Modified By: Johan Vromans
-# Last Modified On: Sat Jan  4 22:28:44 2020
-# Update Count    : 202
+# Last Modified On: Mon Jan  6 22:02:17 2020
+# Update Count    : 212
 # Status          : Okay
+
+# WARNING: This is a run-only module.
 
 ################ Common stuff ################
 
@@ -14,26 +18,42 @@ use Getopt::Long 2.1;
 
 my $my_package = "Sciurix";
 my $my_name = "eps2png";
-our $VERSION = 2.902;
+our $VERSION = 2.903;
+
+my $use_pbm;			# use PBM fallback
+my $res;			# default resolution
+my $scale;			# default scaling
+my $mono;			# produce BW images if non-zero
+my $format;			# output format
+my $gs_format;			# GS output type
+my $output;			# output, defaults to STDOUT
+my $antialias;			# antialiasing
+my $width;			# desired widht
+my $height;			# desired height
+
+my ($verbose,$trace,$test,$debug);
+
+sub run {
+my ( $pkg ) = shift;		# ignore
 
 ################ Program parameters ################
 
 # Some GhostScript programs can produce GIF directly.
 # If not, we need the PBM package for the conversion.
 # NOTE: This will be changed upon install.
-my $use_pbm = 0;
+$use_pbm = 0;			# use PBM fallback
+$res = 82;			# default resolution
+$scale = 1;			# default scaling
+$mono = 0;			# produce BW images if non-zero
+undef $format;			# output format
+$gs_format;			# GS output type
+undef $output;			# output, defaults to STDOUT
+$antialias = 4;			# antialiasing
+undef $width;			# desired widht
+undef $height;			# desired height
 
-my $res = 82;			# default resolution
-my $scale = 1;			# default scaling
-my $mono = 0;			# produce BW images if non-zero
-my $format;			# output format
-my $gs_format;			# GS output type
-my $output;			# output, defaults to STDOUT
-my $antialias = 4;              # antialiasing
-my $width;			# desired widht
-my $height;			# desired height
+($verbose,$trace,$test,$debug) = (0,0,0,0);
 
-my ($verbose,$trace,$test,$debug) = (0,0,0,0);
 handle_options ();
 unless ( defined $format ) {
     if ( $0 =~ /2(gif|jpg|png)$/ ) {
@@ -219,7 +239,9 @@ foreach $eps_file ( @ARGV ) {
 
 }
 
-exit 1 if $err;
+return !$err;
+
+}			 # sub run()
 
 ################ Subroutines ################
 
@@ -335,7 +357,13 @@ EndOfUsage
     exit 1;
 }
 
-# For install testing
+package main;
+
+# Run as a program.
+if ( !caller ) {
+    App::eps2png->run() || exit 1;
+}
+
 1;
 
 __END__
@@ -350,6 +378,11 @@ Converts files from EPS format (Encapsulated PostScript) to some
 popular image formats.
 
 =head1 SYNOPSIS
+
+    use App::eps2png;
+    App::eps2png->run();	# takes args from @ARGV
+
+When installed as a program:
 
     eps2png [ options ] files ...
     eps2gif [ options ] files ...
@@ -485,8 +518,11 @@ Johan Vromans, <jv@cpan.org>.
 
 =head1 BUGS
 
-GhostScript and, if required, the PBM package, need to be installed and
-accessible through the user's C<PATH>.
+GhostScript needs to be installed and accessible through the user's
+C<PATH>.
+
+If required for GIF images, the C<ppmtogif> tool from the PBM package
+needs to be installed and accessible through the user's C<PATH>.
 
 GhostScript is assumed to be capable of handling all the image types
 listed above.
