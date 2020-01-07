@@ -1,7 +1,7 @@
 # -*- rpm-spec -*-
 
 Name: eps2png
-Version: 2.903
+Version: 2.904
 Release: 1
 Source: https://github.com/sciurius/eps2png/archive/%{name}-%{version}.tar.gz
 BuildArch: noarch
@@ -58,7 +58,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/%{name}*
 
 %changelog
-* Mon Jan  6 2020 Johan Vromans <jvromans@squirrel.nl> - 2.903-1
+* Tue Jan  7 2020 Johan Vromans <jvromans@squirrel.nl> - 2.904-1
 - Upgrade to upstream.
 
 * Thu Mar 27 2008 Johan Vromans <jvromans@squirrel.nl> - 1.1-1

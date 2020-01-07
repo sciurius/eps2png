@@ -1,5 +1,11 @@
 2.xxx
 
+2.904	2020-01-07
+
+   - Fix Changes file in MANIFEST.
+
+   - Fix one more unreset variable.
+
 2.903	2020-01-06
 
    - Miscellaneous changes to turn eps2png (script) into a module
