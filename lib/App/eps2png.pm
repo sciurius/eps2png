@@ -5,8 +5,8 @@ package App::eps2png;
 # Author          : Johan Vromans
 # Created On      : Tue Sep 15 15:59:04 1992
 # Last Modified By: Johan Vromans
-# Last Modified On: Tue Jan  7 10:05:34 2020
-# Update Count    : 215
+# Last Modified On: Wed Jan  8 10:14:43 2020
+# Update Count    : 216
 # Status          : Okay
 
 # WARNING: This is a run-only module.
@@ -19,7 +19,7 @@ use Getopt::Long 2.1;
 
 my $my_package = "Sciurix";
 my $my_name = "eps2png";
-our $VERSION = 2.904;
+our $VERSION = 2.905;
 
 my $use_pbm;			# use PBM fallback
 my $res;			# default resolution
